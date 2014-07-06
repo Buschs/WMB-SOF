@@ -32,7 +32,8 @@ It is a service driven Framework and is separated into the following services an
 -	Configuration Database (key component)
 -	Administration GUI 
 
-
+Architecture:
+---------------
 Within the framework concept, each message goes through three independent Message flows. Only the pure processing flows (process) has to be developed individually. The process flow is responsible for message format transformation and process logic like sequencing, collecting, mapping, etc. Each process step is logged into the Database. 
 
 The first process step is a Dispatcher Service. The Dispatcher Service receives messages from internal and external systems via:
@@ -53,9 +54,7 @@ Key points of the Dispatcher Service tasks:
 -	Identify Sender, Message Type, Receiver and determine the overall process.
 -	Determine Routing Parameters for further processing.
 -	Routing Parameters are saved in the WMBSOF configuration database and are maintained via the Administration GUI. The 
-
-Dispatcher Service determines the Routing Parameters from the configuration databaseà this is the only Service that accesses the database.
-
+- Dispatcher Service determines the Routing Parameters from the configuration database. This is the only Service that accesses the database.
 -	Use of Framework Services and components.
 -	Logging via the Logging Service.
 -	Sends the message to the next process step which is a Process Service.
@@ -95,7 +94,6 @@ Main key points of the Delivery Service's task:
 
 For Dispatching (receiving of messages - entrance processing) and Delivery (dispatch from message - output processing) pre-defined flow Templates are available, which must be configured via the administration GUI. In individual cases it can become necessary that in the delivery and dispatcher Main flow additional functionality has to be implemented. 
 
-
 The expiration of the processing chain dispatcher - process - delivery is controlled via Database entries and can be changed at run-time.
 
 The three Main Flows (Dispatcher, Process, Delivery) of the overall-process communicate with each other via WebSphere MQ Series queues.
@@ -122,24 +120,24 @@ Installation:
 
 Usage:
 ---------
-The WMB-SOFramework is a set of WebSphere Message Broker Sub Flows and Main Flows. 
+The WMB-SOFramework is a set of WebSphere Message Broker / IIB Sub Flows and Main Flows. 
 
 The Main Flows provide the following service:
 
-•	Generate Log Events in the Database based on defined properties
-•	Notification
-•	Restart
-•	Maintenance
-•	Monitoring
-•	Sequencing
+-	Generate Log Events in the Database based on defined properties
+-	Notification
+-	Restart
+-	Maintenance
+-	Monitoring
+-	Sequencing
 
 The Sub Flows can be implemented in the customer Flows and provide
 
-•	Dispatching
-•	Delivery
-•	Value Mapping
-•	Errorhandling
-•	Logging
+-	Dispatching
+-	Delivery
+-	Value Mapping
+-	Errorhandling
+-	Logging
 
  
 
