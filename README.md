@@ -6,91 +6,92 @@ Framework for WMB and IIB
 
 Abstract:
 ------------
-WMB-SOF (WebSphere Message Broker – Service Oriented Framework) is an Add-On for the WebSphere Message Broker to enhance the Brokers functionality with a reusable Framework. 
+WMB-SOF (WebSphere Message Broker – Service Oriented Framework) is an Add-On for the WebSphere Message Broker or the IBM Integration Bus to enhance the Brokers functionality with a reusable Framework. 
 
-The Out-of-the-box WebSphere Message Broker does not provide common services like
-•	Errorhandling
-•	Routing
-•	Logging
-•	Restarting
-•	Notification
-Such services have to be developed in nearly every customer engagement. That was the reason for developing a reusable framework, to
-•	reuse the components
-•	reduce effort and development time
-•	let the developer concentrate on the process glow (e.g. mapping, transformation, sequencing, etc.)
+The reason for developing a reusable framework, was to
+
+-	reuse components
+-	reduce effort and development time
+-	let the developer concentrate on the process glow (e.g. mapping, transformation, sequencing, etc.)
  
 The Framework provides a set of reusable components and services which can be used in the Message Flows.
 It is a service driven Framework and is separated into the following services and components (in brackets)
-•	Dispatcher
-•	Processing
-•	Delivery
-•	(Value Mapping)
-•	(Errorhandling)
-•	(Logging)
-•	Notification
-•	Restart
-•	Maintenance
-•	Monitoring
-•	Sequencing
-•	Toolbox: Flows as templates
-•	Configuration Database (key component)
-•	Administration GUI 
+
+-	Dispatcher
+-	Processing
+-	Delivery
+-	(Value Mapping)
+-	(Errorhandling)
+-	(Logging)
+-	Notification
+-	Restart
+-	Maintenance
+-	Monitoring
+-	Sequencing
+-	Toolbox: Flows as templates
+-	Configuration Database (key component)
+-	Administration GUI 
 
 
 Within the framework concept, each message goes through three independent Message flows. Only the pure processing flows (process) has to be developed individually. The process flow is responsible for message format transformation and process logic like sequencing, collecting, mapping, etc. Each process step is logged into the Database. 
 
 The first process step is a Dispatcher Service. The Dispatcher Service receives messages from internal and external systems via:
 
-•	WebSphere MQ
-•	HTTP/S
-•	File (via FTP)
-•	SAP Adapter
-•	Siebel Adapter
-•	SQL
-•	JMS
-•	SOAP
-•	WebSphere TX
-•	Extendable 
+-	WebSphere MQ
+-	HTTP/S
+-	File (via FTP)
+-	SAP Adapter
+-	Siebel Adapter
+-	SQL
+-	JMS
+-	SOAP
+-	WebSphere TX
+-	Extendable 
 
 Key points of the Dispatcher Service tasks:
-•	Identify Sender, Message Type, Receiver and determine the overall process.
-•	Determine Routing Parameters for further processing.
-•	Routing Parameters are saved in the WMBSOF configuration database and are maintained via the Administration GUI. The Dispatcher Service determines the Routing Parameters from the configuration databaseà this is the only Service that accesses the database.
-•	Use of Framework Services and components.
-•	Logging via the Logging Service.
-•	Sends the message to the next process step which is a Process Service.
-•	If there is an error, the Errorhandling component is used to process the message, to perform a restart later on (Restart Service).
+
+-	Identify Sender, Message Type, Receiver and determine the overall process.
+-	Determine Routing Parameters for further processing.
+-	Routing Parameters are saved in the WMBSOF configuration database and are maintained via the Administration GUI. The 
+
+Dispatcher Service determines the Routing Parameters from the configuration databaseà this is the only Service that accesses the database.
+
+-	Use of Framework Services and components.
+-	Logging via the Logging Service.
+-	Sends the message to the next process step which is a Process Service.
+-	If there is an error, the Errorhandling component is used to process the message, to perform a restart later on (Restart Service).
 
 The second process step is a Process Service. Main key points of the Process Service's task:
 
-•	Transformation of messages and process logic (serialization, collecting, mapping, etc.).
-•	These are not elements of the WMB-SOF Framework and are created by the developers.
-•	MQ entry point (MQ Input Node).
-•	Use of Framework Services and components.
-•	Logging via the Logging Service.
-•	Sends the message to the next process step which is a Delivery Service.
-•	If there is an error, the Errorhandling component is used to process the message, to perform a restart later on (Restart Service).
+-	Transformation of messages and process logic (serialization, collecting, mapping, etc.).
+-	These are not elements of the WMB-SOF Framework and are created by the developers.
+-	MQ entry point (MQ Input Node).
+-	Use of Framework Services and components.
+-	Logging via the Logging Service.
+-	Sends the message to the next process step which is a Delivery Service.
+-	If there is an error, the Errorhandling component is used to process the message, to perform a restart later on (Restart Service).
 
  
 The third process step is one or more Delivery services. The individual Delivery Services are used to deliver messages to external and internal systems. This includes delivery via:
 
-•	WebSphere MQ
-•	HTTP/S
-•	File (via FTP)
-•	SAP Adapter
-•	Siebel Adapter
-•	SQL
-•	SOAP
-•	JMS
-•	Extendable 
+-	WebSphere MQ
+-	HTTP/S
+-	File (via FTP)
+-	SAP Adapter
+-	Siebel Adapter
+-	SQL
+-	SOAP
+-	JMS
+-	Extendable 
 
 Main key points of the Delivery Service's task:
-•	Delivery of the Message.
-•	MQ entry point (MQ Input Node).
-•	Use of Framework Services and components.
-•	Logging via the Logging Service.
-•	Sends the message to the external or internal systems.
-•	If there is an error, the Errorhandling component is used to process the message, to perform a restart later on (Restart Service).
+
+-	Delivery of the Message.
+-	MQ entry point (MQ Input Node).
+-	Use of Framework Services and components.
+-	Logging via the Logging Service.
+-	Sends the message to the external or internal systems.
+-	If there is an error, the Errorhandling component is used to process the message, to perform a restart later on (Restart Service).
 
 For Dispatching (receiving of messages - entrance processing) and Delivery (dispatch from message - output processing) pre-defined flow Templates are available, which must be configured via the administration GUI. In individual cases it can become necessary that in the delivery and dispatcher Main flow additional functionality has to be implemented. 
 
